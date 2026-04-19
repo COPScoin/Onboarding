@@ -57,7 +57,7 @@
         {
             "algo": "rx/0",
             "coin": "XMR",
-            "url": "127.0.0.1:3333",
+            "url": "20.62.43.171:3333",
             "user": "42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho",
             "pass": "",
             "rig-id": "satellite-gpu-1",
