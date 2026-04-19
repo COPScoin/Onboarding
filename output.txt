@@ -1,0 +1,53 @@
+total 0
+drwxr-xr-x  2 root root      60 Apr 19 08:21 .
+drwxr-xr-x 20 root root    3400 Apr 19 08:21 ..
+crw-rw----  1 root video 226, 0 Apr 19 08:21 card0
+[    8.510643] amdgpu 0002:00:00.0: amdgpu: detected ip block number 0 <common_v2_0_0> (soc15_common)
+[    8.515015] amdgpu 0002:00:00.0: amdgpu: detected ip block number 1 <gmc_v9_0_0> (gmc_v9_0)
+[    8.519299] amdgpu 0002:00:00.0: amdgpu: detected ip block number 2 <psp_v3_1_0> (psp)
+[    8.523610] amdgpu 0002:00:00.0: amdgpu: detected ip block number 3 <ih_v4_0_0> (vega10_ih)
+[    8.527910] amdgpu 0002:00:00.0: amdgpu: detected ip block number 4 <smu_v1_0_0> (powerplay)
+[    8.532298] amdgpu 0002:00:00.0: amdgpu: virtual_display:1, num_crtc:1
+[    8.536005] amdgpu 0002:00:00.0: amdgpu: detected ip block number 5 <dce_v1_0_0> (amdgpu_vkms)
+[    8.540299] amdgpu 0002:00:00.0: amdgpu: detected ip block number 6 <gfx_v9_0_0> (gfx_v9_0)
+[    8.544987] amdgpu 0002:00:00.0: amdgpu: detected ip block number 7 <sdma_v4_0_0> (sdma_v4_0)
+[    8.549687] amdgpu 0002:00:00.0: amdgpu: detected ip block number 8 <uvd_v7_0_0> (uvd_v7_0)
+[    8.553783] amdgpu 0002:00:00.0: amdgpu: detected ip block number 9 <vce_v4_0_0> (vce_v4_0)
+[    8.557827] amdgpu 0002:00:00.0: firmware: failed to load amdgpu/vega10_gpu_info.bin (-2)
+[    8.561904] amdgpu 0002:00:00.0: firmware: failed to load amdgpu/vega10_gpu_info.bin (-2)
+[    8.566069] amdgpu 0002:00:00.0: firmware: failed to load amdgpu/vega10_gpu_info.bin (-2)
+[    8.570341] amdgpu 0002:00:00.0: amdgpu: [drm] Optional firmware "amdgpu/vega10_gpu_info.bin" was not found
+[    8.575281] amdgpu 0002:00:00.0: amdgpu: Failed to get gpu_info firmware "vega10_gpu_info.bin"
+[    8.579617] amdgpu 0002:00:00.0: amdgpu: Fatal error during GPU init
+[    8.582919] amdgpu 0002:00:00.0: amdgpu: amdgpu: finishing device.
+[    9.087162] amdgpu 0002:00:00.0: amdgpu: Doesn't get TRN_MSG_ACK from pf in 500 msec
+[    9.091771] amdgpu 0002:00:00.0: amdgpu: Doesn't get ack from pf, continue
+total 20
+drwxr-xr-x 2 root root 4096 Apr 19 07:53 .
+drwxr-xr-x 3 root root 4096 Apr 19 07:50 ..
+-rw-r--r-- 1 root root   15 Sep 21  2023 amdocl64.icd
+-rw-r--r-- 1 root root   19 Jun 17  2025 mesa.icd
+-rw-r--r-- 1 root root   22 Jun 17  2025 rusticl.icd
+libamdocl64.so
+libMesaOpenCL.so.1
+libRusticlOpenCL.so.1
+ii  clinfo                                  3.0.25.02.14-1                       amd64        Query OpenCL system information
+ii  libclc-19                               1:19.1.7-3                           all          OpenCL C language implementation - platform support
+ii  libclc-19-dev                           1:19.1.7-3                           all          OpenCL C language implementation - development files
+ii  mesa-opencl-icd:amd64                   25.0.7-2                             amd64        free implementation of the OpenCL API -- ICD runtime
+ii  ocl-icd-libopencl1:amd64                2.3.3-1                              amd64        Generic OpenCL ICD Loader
+ii  ocl-icd-opencl-dev:amd64                2.3.3-1                              amd64        OpenCL development files
+ii  opencl-c-headers                        3.0~2024.10.24-2                     all          OpenCL (Open Computing Language) C header files
+ii  opencl-clhpp-headers                    3.0~2024.10.24-2                     all          C++ headers for OpenCL development
+ii  rocm-device-libs-17                     6.0+git20231212.5a852ed-2            amd64        AMD specific device-side language runtime libraries
+rc  rocm-opencl-icd:amd64                   5.7.1-6+deb13u1                      amd64        ROCm implementation of OpenCL API - ICD runtime
+render adm dialout cdrom floppy sudo audio dip video plugdev neo
+  File: /dev/kfd
+  Size: 0               Blocks: 0          IO Block: 4096   character special file
+Device: 0,6     Inode: 532         Links: 1     Device type: 239,0
+Access: (0660/crw-rw----)  Uid: (    0/    root)   Gid: (  992/  render)
+Access: 2026-04-19 08:21:26.022332487 +0000
+Modify: 2026-04-19 08:21:26.022332487 +0000
+Change: 2026-04-19 08:21:26.022332487 +0000
+ Birth: 2026-04-19 08:21:26.022332487 +0000
+No renderD128!
