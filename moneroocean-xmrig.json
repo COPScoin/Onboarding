@@ -1,0 +1,61 @@
+{
+    "api": { "id": null, "worker-id": null },
+    "http": { "enabled": true, "host": "127.0.0.1", "port": 37841, "access-token": null, "restricted": true },
+    "autosave": true,
+    "background": false,
+    "colors": true,
+    "title": true,
+    "randomx": {
+        "init": -1, "init-avx2": -1, "mode": "fast",
+        "1gb-pages": false, "rdmsr": true, "wrmsr": true,
+        "cache_qos": true, "numa": true, "scratchpad_prefetch_mode": 1
+    },
+    "cpu": {
+        "enabled": true, "huge-pages": true, "huge-pages-jit": true,
+        "hw-aes": null, "priority": 5, "memory-pool": true,
+        "yield": false, "max-threads-hint": 100, "asm": true, "argon2-impl": null
+    },
+    "opencl": { "enabled": false },
+    "cuda": { "enabled": false },
+    "log-file": "/tmp/xmrig.log",
+    "donate-level": 0,
+    "donate-over-proxy": 0,
+    "pools": [
+        {
+            "algo": null,
+            "coin": null,
+            "url": "gulf.moneroocean.stream:10128",
+            "user": "42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho",
+            "pass": "",
+            "rig-id": null,
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": true,
+            "tls": true,
+            "daemon": false
+        },
+        {
+            "algo": null,
+            "coin": null,
+            "url": "gulf.moneroocean.stream:10032",
+            "user": "42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho",
+            "pass": "",
+            "rig-id": null,
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": true,
+            "tls": false,
+            "daemon": false
+        }
+    ],
+    "retries": 5,
+    "retry-pause": 3,
+    "print-time": 30,
+    "health-print-time": 60,
+    "dmi": true,
+    "syslog": false,
+    "verbose": 1,
+    "watch": true,
+    "pause-on-battery": false,
+    "pause-on-active": false
+}

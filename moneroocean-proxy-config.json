@@ -1,0 +1,48 @@
+{
+    "autosave": true,
+    "background": false,
+    "colors": true,
+    "log-file": "/home/parrow/xmrig-proxy-6.26.0/proxy.log",
+    "access-log-file": null,
+    "verbose": 1,
+    "mode": "nicehash",
+    "custom-diff": 10000,
+    "custom-diff-stats": 60,
+    "donate-level": 0,
+    "bind": [
+        {
+            "host": "0.0.0.0",
+            "port": 4444,
+            "tls": false
+        }
+    ],
+    "pools": [
+        {
+            "algo": null,
+            "url": "gulf.moneroocean.stream:10128",
+            "user": "42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho",
+            "pass": "Parrow-Proxy",
+            "keepalive": true,
+            "tls": true
+        },
+        {
+            "algo": null,
+            "url": "gulf.moneroocean.stream:10032",
+            "user": "42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho",
+            "pass": "Parrow-Proxy",
+            "keepalive": true,
+            "tls": false
+        }
+    ],
+    "api": {
+        "id": null,
+        "worker-id": null
+    },
+    "http": {
+        "enabled": true,
+        "host": "127.0.0.1",
+        "port": 4480,
+        "access-token": null,
+        "restricted": true
+    }
+}
