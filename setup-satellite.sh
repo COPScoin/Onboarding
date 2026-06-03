@@ -19,7 +19,7 @@ set -euo pipefail
 # ═══════════════════════════════════════════════════════════════════════════════
 # CONFIG — EDIT THESE IF NEEDED
 # ═══════════════════════════════════════════════════════════════════════════════
-MAIN_NODE_IP="34.229.240.91"          # Where monerod runs
+MAIN_NODE_IP="216.232.246.207"          # Where monerod runs
 MONEROD_RPC_PORT="18081"             # monerod RPC
 MONEROD_ZMQ_PORT="18083"             # monerod ZMQ pub
 WALLET_ADDRESS="42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho"
@@ -229,7 +229,7 @@ cat > "$INSTALL_DIR/xmrig.json" << XMRIG_EOF
         {
             "algo": "rx/0",
             "coin": "XMR",
-            "url": "34.229.240.91:${P2POOL_STRATUM_PORT}",
+            "url": "216.232.246.207:${P2POOL_STRATUM_PORT}",
             "user": "${WALLET_ADDRESS}",
             "pass": "",
             "rig-id": "${HOSTNAME}",
