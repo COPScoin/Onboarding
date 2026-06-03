@@ -8,7 +8,7 @@
 # xmrig mines to LOCAL p2pool (127.0.0.1:3333)
 # p2pool connects to REMOTE monerod (main node)
 #
-# Main Node IP: 20.62.43.171
+# Main Node IP: 34.229.240.91
 # Wallet: 42ykwP...
 #
 # Usage: sudo bash setup-satellite.sh
@@ -19,14 +19,14 @@ set -euo pipefail
 # ═══════════════════════════════════════════════════════════════════════════════
 # CONFIG — EDIT THESE IF NEEDED
 # ═══════════════════════════════════════════════════════════════════════════════
-MAIN_NODE_IP="20.62.43.171"          # Where monerod runs
+MAIN_NODE_IP="34.229.240.91"          # Where monerod runs
 MONEROD_RPC_PORT="18081"             # monerod RPC
 MONEROD_ZMQ_PORT="18083"             # monerod ZMQ pub
 WALLET_ADDRESS="42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho"
 P2POOL_STRATUM_PORT="3333"           # LOCAL p2pool stratum (xmrig connects here)
 P2POOL_P2P_PORT="37889"              # p2pool sidechain p2p
-XMRIG_VERSION="6.22.2"
-P2POOL_VERSION="4.5"
+XMRIG_VERSION="6.26.0"
+P2POOL_VERSION="4.15.1"
 INSTALL_DIR="/opt/mining"
 USE_MINI="--mini"                    # Use mini sidechain (better for low hashrate)
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -229,7 +229,7 @@ cat > "$INSTALL_DIR/xmrig.json" << XMRIG_EOF
         {
             "algo": "rx/0",
             "coin": "XMR",
-            "url": "20.62.43.171:${P2POOL_STRATUM_PORT}",
+            "url": "34.229.240.91:${P2POOL_STRATUM_PORT}",
             "user": "${WALLET_ADDRESS}",
             "pass": "",
             "rig-id": "${HOSTNAME}",
