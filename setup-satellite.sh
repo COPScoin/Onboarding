@@ -148,20 +148,20 @@ else
 fi
 
 # ─── STEP 7: Download P2Pool ────────────────────────────────────────────────
-if [ ! -f "$INSTALL_DIR/p2pool/p2pool" ]; then
-    log "Downloading P2Pool v${P2POOL_VERSION}..."
-    ARCH=$(uname -m)
-    [ "$ARCH" = "x86_64" ] && P2POOL_ARCH="linux-x64" || P2POOL_ARCH="linux-aarch64"
-    mkdir -p p2pool && cd p2pool
-    wget -q "https://github.com/SChernykh/p2pool/releases/download/v${P2POOL_VERSION}/p2pool-v${P2POOL_VERSION}-${P2POOL_ARCH}.tar.gz" -O p2pool.tar.gz
-    tar xzf p2pool.tar.gz --strip-components=1
-    rm -f p2pool.tar.gz
-    chmod +x p2pool
-    cd "$INSTALL_DIR"
-    [ -f "$INSTALL_DIR/p2pool/p2pool" ] && log "P2Pool downloaded ✓" || { err "P2Pool download failed!"; exit 1; }
-else
-    log "P2Pool already installed ✓"
-fi
+#if [ ! -f "$INSTALL_DIR/p2pool/p2pool" ]; then
+ #   log "Downloading P2Pool v${P2POOL_VERSION}..."
+  #  ARCH=$(uname -m)
+   # [ "$ARCH" = "x86_64" ] && P2POOL_ARCH="linux-x64" || P2POOL_ARCH="linux-aarch64"
+    #mkdir -p p2pool && cd p2pool
+    #wget -q "https://github.com/SChernykh/p2pool/releases/download/v${P2POOL_VERSION}/p2pool-v${P2POOL_VERSION}-${P2POOL_ARCH}.tar.gz" -O p2pool.tar.gz
+    #tar xzf p2pool.tar.gz --strip-components=1
+    #rm -f p2pool.tar.gz
+    #chmod +x p2pool
+    #cd "$INSTALL_DIR"
+    #[ -f "$INSTALL_DIR/p2pool/p2pool" ] && log "P2Pool downloaded ✓" || { err "P2Pool download failed!"; exit 1; }
+#else
+ #   log "P2Pool already installed ✓"
+#fi
 
 # ─── STEP 8: XMRig Config ───────────────────────────────────────────────────
 log "Generating xmrig.json..."
