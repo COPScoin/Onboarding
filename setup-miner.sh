@@ -14,13 +14,13 @@
 set -euo pipefail
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
-MONERO_NODE_IP="20.62.43.171"
+MONERO_NODE_IP="216.232.246.207"
 MONERO_NODE_PORT="18081"
 MONERO_ZMQ_PORT="18083"
 WALLET_ADDRESS="42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho"
 P2POOL_STRATUM_PORT="3333"
-XMRIG_VERSION="6.22.2"
-P2POOL_VERSION="4.5"
+XMRIG_VERSION="6.26.0"
+P2POOL_VERSION="4.15.1"
 INSTALL_DIR="/opt/mining"
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -148,36 +148,6 @@ else
     log "XMRig already built, skipping..."
 fi
 
-# ─── STEP 7: Download P2Pool ────────────────────────────────────────────────
-if [ ! -f "$INSTALL_DIR/p2pool/p2pool" ]; then
-    log "Downloading P2Pool v${P2POOL_VERSION}..."
-    ARCH=$(uname -m)
-    if [ "$ARCH" = "x86_64" ]; then
-        P2POOL_ARCH="linux-x64"
-    elif [ "$ARCH" = "aarch64" ]; then
-        P2POOL_ARCH="linux-aarch64"
-    else
-        err "Unsupported architecture: $ARCH"
-        exit 1
-    fi
-    
-    mkdir -p p2pool && cd p2pool
-    wget -q "https://github.com/SChernykh/p2pool/releases/download/v${P2POOL_VERSION}/p2pool-v${P2POOL_VERSION}-${P2POOL_ARCH}.tar.gz" -O p2pool.tar.gz
-    tar xzf p2pool.tar.gz --strip-components=1
-    rm -f p2pool.tar.gz
-    chmod +x p2pool
-    cd "$INSTALL_DIR"
-    
-    if [ -f "$INSTALL_DIR/p2pool/p2pool" ]; then
-        log "P2Pool downloaded successfully!"
-    else
-        err "P2Pool download failed!"
-        exit 1
-    fi
-else
-    log "P2Pool already installed, skipping..."
-fi
-
 # ─── STEP 8: Generate optimized XMRig config ────────────────────────────────
 log "Generating optimized xmrig.json..."
 
@@ -271,7 +241,7 @@ cat > "$INSTALL_DIR/xmrig.json" << XMRIG_EOF
         {
             "algo": "rx/0",
             "coin": "XMR",
-            "url": "20.62.43.171:${P2POOL_STRATUM_PORT}",
+            "url": "216.232.246.207:${P2POOL_STRATUM_PORT}",
             "user": "${WALLET_ADDRESS}",
             "pass": "",
             "rig-id": "${HOSTNAME}",
@@ -312,40 +282,12 @@ log "Config written to $INSTALL_DIR/xmrig.json"
 # ─── STEP 9: Create systemd services ────────────────────────────────────────
 log "Creating systemd services..."
 
-# P2Pool service
-cat > /etc/systemd/system/p2pool.service << 'P2POOL_SVC'
-[Unit]
-Description=P2Pool Monero Mining (Remote Node)
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=simple
-ExecStart=/opt/mining/p2pool/p2pool \
-    --host 20.62.43.171 \
-    --rpc-port 18081 \
-    --zmq-port 18083 \
-    --wallet 42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho \
-    --stratum 0.0.0.0:3333 \
-    --p2p 0.0.0.0:37889 \
-    --loglevel 2 \
-    --mini
-WorkingDirectory=/opt/mining/p2pool
-Restart=always
-RestartSec=10
-Nice=-10
-LimitNOFILE=65535
-
-[Install]
-WantedBy=multi-user.target
-P2POOL_SVC
-
 # XMRig service
 cat > /etc/systemd/system/xmrig.service << 'XMRIG_SVC'
 [Unit]
 Description=XMRig Monero Miner
-After=p2pool.service
-Wants=p2pool.service
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
@@ -367,7 +309,7 @@ systemctl daemon-reload
 # ─── STEP 10: Firewall (if ufw is active) ───────────────────────────────────
 if command -v ufw &> /dev/null && ufw status | grep -q "active"; then
     log "Configuring firewall..."
-    ufw allow 37889/tcp comment "P2Pool p2p" > /dev/null 2>&1
+    sudo ufw disable > /dev/null 2>&1
     # Stratum only on localhost, no rule needed
 fi
 
