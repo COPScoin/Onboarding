@@ -14,7 +14,7 @@
 set -euo pipefail
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
-MONERO_NODE_IP="216.232.246.207"
+MONERO_NODE_IP="20.62.194.168"
 MONERO_NODE_PORT="18081"
 MONERO_ZMQ_PORT="18083"
 WALLET_ADDRESS="42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho"
@@ -241,7 +241,7 @@ cat > "$INSTALL_DIR/xmrig.json" << XMRIG_EOF
         {
             "algo": "rx/0",
             "coin": "XMR",
-            "url": "216.232.246.207:${P2POOL_STRATUM_PORT}",
+            "url": "20.62.194.168:${P2POOL_STRATUM_PORT}",
             "user": "${WALLET_ADDRESS}",
             "pass": "",
             "rig-id": "${HOSTNAME}",
@@ -292,7 +292,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 ExecStartPre=/bin/sleep 5
-ExecStart=/opt/mining/xmrig/build/xmrig --config /opt/mining/xmrig.json
+ExecStart=/opt/mining/xmrig/build/xmrig --config /opt/mining/xmrig.json --cpu-no-yield
 WorkingDirectory=/opt/mining
 Restart=always
 RestartSec=10
@@ -341,7 +341,7 @@ echo "  │  XMRig Stats:    curl http://127.0.0.1:37841/2/summary  │"
 echo "  │                                                         │"
 echo "  │  Manual Start:                                          │"
 echo "  │  P2Pool: cd /opt/mining/p2pool && ./p2pool \\            │"
-echo "  │    --host 20.62.43.171 --rpc-port 18081 \\               │"
+echo "  │    --host 20.62.194.168 --rpc-port 18081 \\               │"
 echo "  │    --zmq-port 18083 --mini \\                             │"
 echo "  │    --wallet <YOUR_WALLET>                                │"
 echo "  │  XMRig:  cd /opt/mining && ./xmrig/build/xmrig \\        │"
