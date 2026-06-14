@@ -6,7 +6,7 @@
 #   - P2Pool (running locally on this VM, connecting to remote monerod)
 #   - XMRig (mining to local P2Pool)
 #
-# Remote Monero Node: 20.62.43.171:18081
+# Remote Monero Node: 20.153.143.32:18081
 #
 # Usage: sudo bash setup-miner.sh
 ###############################################################################
@@ -14,7 +14,7 @@
 set -euo pipefail
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
-MONERO_NODE_IP="20.62.194.168"
+MONERO_NODE_IP="20.153.143.32"
 MONERO_NODE_PORT="18081"
 MONERO_ZMQ_PORT="18083"
 WALLET_ADDRESS="42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho"
@@ -241,7 +241,7 @@ cat > "$INSTALL_DIR/xmrig.json" << XMRIG_EOF
         {
             "algo": "rx/0",
             "coin": "XMR",
-            "url": "20.62.194.168:${P2POOL_STRATUM_PORT}",
+            "url": "20.153.143.32:${P2POOL_STRATUM_PORT}",
             "user": "${WALLET_ADDRESS}",
             "pass": "",
             "rig-id": "${HOSTNAME}",
