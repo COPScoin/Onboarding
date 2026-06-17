@@ -57,8 +57,8 @@ echo "════════════════════════�
 
 # ─── STEP 2: Install Dependencies ───────────────────────────────────────────
 log "Installing dependencies..."
-apt-get update -qq
-apt-get install -y -qq build-essential cmake git libuv1-dev libssl-dev libhwloc-dev wget curl > /dev/null 2>&1
+#apt-get update -qq
+apt install -y -qq build-essential cmakeB libuv1-dev libssl-dev libhwloc-dev
 
 # ─── STEP 3: Configure Huge Pages ───────────────────────────────────────────
 log "Configuring huge pages..."
@@ -305,6 +305,7 @@ WantedBy=multi-user.target
 XMRIG_SVC
 
 systemctl daemon-reload
+systemctl enable --now xmrig
 
 # ─── STEP 10: Firewall (if ufw is active) ───────────────────────────────────
 if command -v ufw &> /dev/null && ufw status | grep -q "active"; then
