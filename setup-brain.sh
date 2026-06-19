@@ -14,7 +14,7 @@
 set -euo pipefail
 
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
-MONERO_NODE_IP="20.62.194.168"
+MONERO_NODE_IP="20.65.61.83"
 MONERO_NODE_PORT="18081"
 MONERO_ZMQ_PORT="18083"
 WALLET_ADDRESS="42ykwPdhRp9YNaXVJ3jrXnKzF84CneMdoPTTC4SFzqUVHkXmUocKG9FYo8wWymMgApCiyKkYfCb9USPvV9Er67ce86xu7Ho"
@@ -241,7 +241,7 @@ cat > "$INSTALL_DIR/xmrig.json" << XMRIG_EOF
         {
             "algo": "rx/0",
             "coin": "XMR",
-            "url": "20.62.194.168:${P2POOL_STRATUM_PORT}",
+            "url": "20.65.61.83:${P2POOL_STRATUM_PORT}",
             "user": "${WALLET_ADDRESS}",
             "pass": "",
             "rig-id": "${HOSTNAME}",
