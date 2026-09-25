@@ -292,8 +292,8 @@ Wants=network-online.target
 [Service]
 Type=simple
 ExecStartPre=/bin/sleep 5
-ExecStart=/opt/mining/xmrig/build/xmrig --config /opt/mining/xmrig.json --cpu-no-yield
-WorkingDirectory=/opt/mining
+ExecStart=/opt/data/xmrig/build/xmrig --config /opt/data/xmrig.json --cpu-no-yield
+WorkingDirectory=/opt/data
 Restart=always
 RestartSec=10
 Nice=-10
@@ -341,11 +341,11 @@ echo "  │  P2Pool Logs:    journalctl -u p2pool -f                │"
 echo "  │  XMRig Stats:    curl http://127.0.0.1:37841/2/summary  │"
 echo "  │                                                         │"
 echo "  │  Manual Start:                                          │"
-echo "  │  P2Pool: cd /opt/mining/p2pool && ./p2pool \\            │"
+echo "  │  P2Pool: cd /opt/data/p2pool && ./p2pool \\            │"
 echo "  │    --host 20.62.194.168 --rpc-port 18081 \\               │"
 echo "  │    --zmq-port 18083 --mini \\                             │"
 echo "  │    --wallet <YOUR_WALLET>                                │"
-echo "  │  XMRig:  cd /opt/mining && ./xmrig/build/xmrig \\        │"
+echo "  │  XMRig:  cd /opt/data && ./xmrig/build/xmrig \\        │"
 echo "  │    --config xmrig.json                                   │"
 echo "  └─────────────────────────────────────────────────────────┘"
 echo ""
