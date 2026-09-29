@@ -28,6 +28,12 @@ echo "  This VM: $(hostname) / $(hostname -I | awk '{print $1}')"
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 
+sudo apt update && sudo apt-get full-upgrade -y
+sudo mkdir -p /mnt/resource && sudo chown -R azureuser:azureuser /mnt/resource
+
+sudo apt-get install -y --install-suggests monero && cd /mnt/resource
+monerod --data-dir=/mnt/resource/.bitmonero --zmq-pub tcp://127.0.0.1:18083 --out-peers 32 --in-peers 64   --add-priority-node=p2pmd.xmrvsbeast.com:18080   --add-priority-node=nodes.hashvault.pro:18080   --disable-dns-checkpoints --enable-dns-blocklist   --rpc-bind-port=18081 --prep-blocks-threads=48 --max-concurrency=48   --block-sync-size=100 --prune-blockchain --detach
+
 # ─── CHECK MONEROD STATUS ────────────────────────────────────────────────────
 if pgrep -x monerod > /dev/null; then
     MONEROD_PID=$(pgrep -x monerod)
