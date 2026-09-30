@@ -93,17 +93,17 @@ else
 fi
 
 # 1GB pages (optional, for supported CPUs)
-if grep -q pdpe1gb /proc/cpuinfo; then
-    log "CPU supports 1GB pages — enabling..."
-    if ! grep -q "hugepagesz=1G" /etc/default/grub; then
-        sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 hugepagesz=1G hugepages=3"/' /etc/default/grub
-        update-grub 2>/dev/null || true
-        warn "1GB pages require reboot to activate"
-    fi
-    GB_PAGES=true
-else
-    GB_PAGES=false
-fi
+#if grep -q pdpe1gb /proc/cpuinfo; then
+ #   log "CPU supports 1GB pages — enabling..."
+  #  if ! grep -q "hugepagesz=1G" /etc/default/grub; then
+  #      sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 hugepagesz=1G hugepages=3"/' /etc/default/grub
+   #     update-grub 2>/dev/null || true
+    #    warn "1GB pages require reboot to activate"
+    #fi
+    #GB_PAGES=true
+#else
+ #   GB_PAGES=false
+#fi
 
 # Verify
 ACTUAL_HP=$(cat /proc/meminfo | grep HugePages_Total | awk '{print $2}')
