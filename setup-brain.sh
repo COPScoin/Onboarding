@@ -81,7 +81,7 @@ else
     echo "vm.nr_hugepages=$HUGEPAGES" >> /etc/sysctl.conf
 fi
 
- 1GB pages (optional, for supported CPUs)
+# 1GB pages (optional, for supported CPUs)
 if grep -q pdpe1gb /proc/cpuinfo; then
     log "CPU supports 1GB pages — enabling..."
     if ! grep -q "hugepagesz=1G" /etc/default/grub; then
