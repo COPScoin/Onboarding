@@ -1,15 +1,4 @@
 #!/bin/bash
-###############################################################################
-# XMRig + P2Pool Remote Miner Setup Script
-# 
-# This sets up a Debian-based VM to mine Monero via:
-#   - P2Pool (running locally on this VM, connecting to remote monerod)
-#   - XMRig (mining to local P2Pool)
-#
-# Remote Monero Node: 20.153.143.32:18081
-#
-# Usage: sudo bash setup-miner.sh
-###############################################################################
 
 set -euo pipefail
 
@@ -75,7 +64,7 @@ NUM_CORES=$(nproc)
 HUGEPAGES=$((1040 + NUM_CORES + 128))
 
 # Don't use more than 80% of RAM for huge pages
-MAX_HUGEPAGES=$(( (TOTAL_RAM_MB * 80 / 100) / 2 ))
+MAX_HUGEPAGES=$(( (TOTAL_RAM_MB * 85 / 100) / 2 ))
 if [ "$HUGEPAGES" -gt "$MAX_HUGEPAGES" ]; then
     HUGEPAGES=$MAX_HUGEPAGES
 fi
@@ -92,18 +81,18 @@ else
     echo "vm.nr_hugepages=$HUGEPAGES" >> /etc/sysctl.conf
 fi
 
-# 1GB pages (optional, for supported CPUs)
-#if grep -q pdpe1gb /proc/cpuinfo; then
- #   log "CPU supports 1GB pages — enabling..."
-  #  if ! grep -q "hugepagesz=1G" /etc/default/grub; then
-  #      sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 hugepagesz=1G hugepages=3"/' /etc/default/grub
-   #     update-grub 2>/dev/null || true
-    #    warn "1GB pages require reboot to activate"
-    #fi
-    #GB_PAGES=true
-#else
- #   GB_PAGES=false
-#fi
+ 1GB pages (optional, for supported CPUs)
+if grep -q pdpe1gb /proc/cpuinfo; then
+    log "CPU supports 1GB pages — enabling..."
+    if ! grep -q "hugepagesz=1G" /etc/default/grub; then
+        sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 hugepagesz=1G hugepages=3"/' /etc/default/grub
+        update-grub 2>/dev/null || true
+        warn "1GB pages require reboot to activate"
+    fi
+    GB_PAGES=true
+else
+    GB_PAGES=false
+fi
 
 # Verify
 ACTUAL_HP=$(cat /proc/meminfo | grep HugePages_Total | awk '{print $2}')
