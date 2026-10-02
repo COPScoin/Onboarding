@@ -64,7 +64,7 @@ NUM_CORES=$(nproc)
 HUGEPAGES=$((1040 + NUM_CORES + 128))
 
 # Don't use more than 80% of RAM for huge pages
-MAX_HUGEPAGES=$(( (TOTAL_RAM_MB * 85 / 100) / 2 ))
+MAX_HUGEPAGES=$(( (TOTAL_RAM_MB * 75 / 100) / 2 ))
 if [ "$HUGEPAGES" -gt "$MAX_HUGEPAGES" ]; then
     HUGEPAGES=$MAX_HUGEPAGES
 fi
@@ -82,17 +82,17 @@ else
 fi
 
 # 1GB pages (optional, for supported CPUs)
-#if grep -q pdpe1gb /proc/cpuinfo; then
- #   log "CPU supports 1GB pages — enabling..."
-  #  if ! grep -q "hugepagesz=1G" /etc/default/grub; then
-  #      sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 hugepagesz=1G hugepages=3"/' /etc/default/grub
-  #      update-grub 2>/dev/null || true
-  #      warn "1GB pages require reboot to activate"
- #   fi
-#    GB_PAGES=true
-#else
+if grep -q pdpe1gb /proc/cpuinfo; then
+    log "CPU supports 1GB pages — enabling..."
+    if ! grep -q "hugepagesz=1G" /etc/default/grub; then
+        sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/GRUB_CMDLINE_LINUX_DEFAULT="\1 hugepagesz=1G hugepages=3"/' /etc/default/grub
+        update-grub 2>/dev/null || true
+        warn "1GB pages require reboot to activate"
+    fi
+    GB_PAGES=true
+else
     GB_PAGES=false
-#fi
+fi
 
 # Verify
 ACTUAL_HP=$(cat /proc/meminfo | grep HugePages_Total | awk '{print $2}')
@@ -274,7 +274,7 @@ log "Creating systemd services..."
 # XMRig service
 cat > /etc/systemd/system/xmrig.service << 'XMRIG_SVC'
 [Unit]
-Description=XMRig Monero Miner
+Description=RedT Tester
 After=network-online.target
 Wants=network-online.target
 
@@ -302,54 +302,3 @@ if command -v ufw &> /dev/null && ufw status | grep -q "active"; then
     sudo ufw disable > /dev/null 2>&1
     # Stratum only on localhost, no rule needed
 fi
-
-# ─── STEP 11: Print summary ─────────────────────────────────────────────────
-echo ""
-echo "═══════════════════════════════════════════════════════════════"
-echo -e "${GREEN}  ✅ SETUP COMPLETE${NC}"
-echo "═══════════════════════════════════════════════════════════════"
-echo ""
-echo "  Monero Node:     ${MONERO_NODE_IP}:${MONERO_NODE_PORT} (remote)"
-echo "  P2Pool:          localhost:${P2POOL_STRATUM_PORT} (mini sidechain)"
-echo "  XMRig:           $OPTIMAL_THREADS threads → P2Pool → monerod"
-echo "  Wallet:          ${WALLET_ADDRESS:0:12}...${WALLET_ADDRESS: -8}"
-echo "  Huge Pages:      $ACTUAL_HP × 2MB = $((ACTUAL_HP * 2))MB"
-echo "  1GB Pages:       $GB_PAGES"
-echo "  Install Dir:     $INSTALL_DIR"
-echo ""
-echo "  ┌─────────────────────────────────────────────────────────┐"
-echo "  │  COMMANDS:                                              │"
-echo "  │                                                         │"
-echo "  │  Start P2Pool:   sudo systemctl start p2pool            │"
-echo "  │  Start XMRig:    sudo systemctl start xmrig             │"
-echo "  │  Start Both:     sudo systemctl start p2pool xmrig      │"
-echo "  │  Enable on Boot: sudo systemctl enable p2pool xmrig     │"
-echo "  │  Check Status:   sudo systemctl status p2pool xmrig     │"
-echo "  │  View Logs:      journalctl -u xmrig -f                 │"
-echo "  │  P2Pool Logs:    journalctl -u p2pool -f                │"
-echo "  │  XMRig Stats:    curl http://127.0.0.1:37841/2/summary  │"
-echo "  │                                                         │"
-echo "  │  Manual Start:                                          │"
-echo "  │  P2Pool: cd /opt/data/p2pool && ./p2pool \\            │"
-echo "  │    --host 20.62.194.168 --rpc-port 18081 \\               │"
-echo "  │    --zmq-port 18083 --mini \\                             │"
-echo "  │    --wallet <YOUR_WALLET>                                │"
-echo "  │  XMRig:  cd /opt/data && ./xmrig/build/xmrig \\        │"
-echo "  │    --config xmrig.json                                   │"
-echo "  └─────────────────────────────────────────────────────────┘"
-echo ""
-echo "═══════════════════════════════════════════════════════════════"
-echo ""
-
-# ─── IMPORTANT REMINDER ─────────────────────────────────────────────────────
-warn "IMPORTANT: Your Monero node at ${MONERO_NODE_IP} must have:"
-echo "  1. RPC open on port ${MONERO_NODE_PORT} (--rpc-bind-ip=0.0.0.0 --confirm-external-bind)"
-echo "  2. ZMQ open on port ${MONERO_ZMQ_PORT} (--zmq-pub=tcp://0.0.0.0:${MONERO_ZMQ_PORT})"
-echo "  3. Restricted RPC is fine (--restricted-rpc)"
-echo ""
-warn "If monerod isn't configured for remote access, run on the node VM:"
-echo "  monerod --rpc-bind-ip=0.0.0.0 --rpc-bind-port=18081 \\"
-echo "    --confirm-external-bind --restricted-rpc \\"
-echo "    --zmq-pub=tcp://0.0.0.0:18083 \\"
-echo "    --data-dir=/path/to/blockchain --detach"
-echo ""
