@@ -47,7 +47,7 @@ echo "════════════════════════�
 # ─── STEP 2: Install Dependencies ───────────────────────────────────────────
 log "Installing dependencies..."
 #apt-get update -qq
-apt install -y -qq build-essential cmake libuv1-dev libssl-dev libhwloc-de libcap2 libc6-dev
+apt install -y -qq build-essential cmake libuv1-dev libssl-dev libhwloc-dev libcap2 libc6-dev
 
 # ─── STEP 3: Configure Huge Pages ───────────────────────────────────────────
 log "Configuring..."
